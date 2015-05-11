@@ -1,0 +1,340 @@
+
+
+h1#sub {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-size: 30px;
+	font-weight: 300;
+	position: relative;
+	top: -29px;
+}
+
+h1#title {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	position: relative;
+	left: -125px;
+	
+}
+
+h1#sub2 {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-size: 30px;
+	font-weight: 300;
+	position: relative;
+	left: 6px;
+	top: -29px;	
+}
+
+h1#title2 {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+
+	
+}
+
+table {
+	margin: 0 auto;
+}
+
+.choose {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	position: relative;
+	left: -85px;
+	top: -18px;
+}
+
+.titleForChoose {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	position: relative;
+	left: -150px;
+	font-weight: bold;
+}
+.titleForChoose2 {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	position: relative;
+	left: -22px;
+	font-weight: bold;
+}
+
+.titleForChoose3 {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	position: relative;
+	left: -145px;
+	font-weight: bold;
+}
+
+.titleForChoose4 {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	position: relative;
+	left: -173px;
+	font-weight: bold;
+}
+
+
+.cc-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+
+.cc-selector-2 input{
+    position:absolute;
+    z-index:999;
+}
+
+.visa{background-image:url(http://i.imgur.com/lXzJ1eB.png);}
+div.visa{background-image:url(http://i.imgur.com/lXzJ1eB.png);
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+}
+
+div.mastercard{background-image:url(http://i.imgur.com/SJbRQF7.png);
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+}
+
+.mastercard{background-image:url(http://i.imgur.com/SJbRQF7.png);}
+
+.cc-selector-2 input:active +.semiconductor-cpu, .semiconductor-cpu input:active +.semiconductor-cpu{opacity: .9;}
+.cc-selector-2 input:checked +.semiconductor-cpu, .cc-selector input:checked +.semiconductor-cpu
+{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+
+.cc-selector-2 input:active +.drinkcard-cc, .drinkcard-cc input:active +.drinkcard-cc{opacity: .9;}
+.cc-selector-2 input:checked +.drinkcard-cc, .cc-selector input:checked +.drinkcard-cc
+{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+
+.cc-selector-2 input:active +.smartphone-sp, .smartphone-sp input:active +.smartphone-sp{opacity: .9;}
+.cc-selector-2 input:checked +.smartphone-sp, .cc-selector input:checked +.smartphone-sp
+{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+
+.cc-selector-2 input:active +.sport-st, .sport-st input:active +.sport-st{opacity: .9;}
+.cc-selector-2 input:checked +.sport-st, .cc-selector input:checked +.sport-st
+{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+
+.drinkcard-cc{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+.drinkcard-cc:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+/* Extras */
+a:visited{color:#888}
+a{color:#444;text-decoration:none;}
+p{margin-bottom:.3em;}
+
+.wrapper {
+	margin: 0 auto;
+	width: 500px;
+	position: relative;
+	left: 65px;
+}
+
+
+
+.cc-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+
+.cc-selector-2 input{
+    position:absolute;
+    z-index:999;
+}
+
+.visa{background-image:url(http://i.imgur.com/lXzJ1eB.png);}
+.mastercard{background-image:url(http://i.imgur.com/SJbRQF7.png);}
+
+
+
+.semiconductor-cpu{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+.semiconductor-cpu:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+.smartphone-sp{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+.smartphone-sp:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+.sport-st{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+.sport-st:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+.amd {background-image:url(amd.png);}
+.nvidia {background-image:url(nvidia.png);}
+
+div.amd {background-image:url(amd.png);
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+}
+div.nvidia {background-image:url(nvidia.png);
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+}
+
+.galaxy {background-image:url(galaxy.png);}
+.iphone {background-image:url(iphone.png);}
+
+div.galaxy {background-image:url(galaxy.png);
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+}
+div.iphone {background-image:url(iphone.png);
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+}
+
+.basketball {background-image:url(football.png);}
+.football {background-image:url(basketball.png);}
+
+div.basketball {background-image:url(football.png);
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+}
+div.football {background-image:url(basketball.png);
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+}
+
+.myButton {
+	-moz-box-shadow:inset 0px 0px 14px -3px #f2fadc;
+	-webkit-box-shadow:inset 0px 0px 14px -3px #f2fadc;
+	box-shadow:inset 0px 0px 14px -3px #f2fadc;
+	background-color:#e0e0e0;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #b8b8b8;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:11px 23px;
+	text-decoration:none;
+	margin-top: 40px;
+	text-shadow:0px 1px 0px #d6d6d6;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.myButton:hover {
+	background-color:#c2c2c2;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+p.boldNum {
+	position:relative;
+	left: 20px;
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 10px;
+	
+	  display: inline-block;
+  vertical-align: middle;
+}
