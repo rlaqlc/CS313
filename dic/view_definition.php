@@ -1,14 +1,11 @@
 <?php
 	try
 	{
-		define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
-		define('DB_PORT',getenv('OPENSHIFT_MYSQL_DB_PORT')); 
-		define('DB_USER',getenv('OPENSHIFT_MYSQL_DB_USERNAME'));
-		define('DB_PASS',getenv('OPENSHIFT_MYSQL_DB_PASSWORD'));
 		$dbname = "php";
-
-		$dsn = 'mysql:dbname='.$dbname.';host='.DB_HOST.';port='.DB_PORT;
-		$sdb = new PDO($dsn, DB_USER, DB_PASS);
+		$user = "adminB7ehKnn";
+		$password = "4cTNSxnzxlfe";
+		$dsn = 'mysql:dbname='.$dbname.';host='127.7.105.130';port='3306';
+		$sdb = new PDO($dsn, $user, $password);
 	}
 	catch (PDOException $ex)
 	{
