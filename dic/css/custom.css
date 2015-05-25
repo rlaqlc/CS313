@@ -99,3 +99,21 @@ margin: 0 auto;
 .emptyspace{
 	height: 74px;
 }
+
+.definition:link {
+    text-decoration: none;
+	color:inherit;
+}
+
+.definition:visited {
+    text-decoration: none;
+	color:inherit;
+}
+
+.definition:hover {
+    text-decoration: underline;
+}
+
+.definition:active {
+    text-decoration: underline;
+}
