@@ -58,7 +58,7 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
 			<li><a href="index.php">Home</a></li>
-            <li class="active"><a href="#">Browse</a></li>
+            <li class="active"><a href="browse.php">Browse</a></li>
             <li><a href="#contact">Submit</a></li>
 			<li><a href="#contact">About</a></li>
           </ul>
@@ -67,7 +67,11 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
     </nav>
 	<div class="emptyspace"></div>
 	  <?php
-	  	$statement = $db->query("SELECT word FROM word WHERE id=". $_GET['id']);
+	  	$statement = $db->query("SELECT w_id FROM definition WHERE id=". $_GET['id']);
+		$row = $statement->fetch(PDO::FETCH_ASSOC);
+		$wordID = $row['w_id'];
+		
+		$statement = $db->query("SELECT word FROM word WHERE id=" . $wordID);
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
 	  ?>		
 	<div class="category">
@@ -77,6 +81,8 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 	  <button type="button" class="btn btn-info btn-sm">Computer Science</button>
 	  <span><strong>/</strong></span>
 	  <button type="button" class="btn btn-info btn-sm"><?php echo $row['word']; ?></button>
+	  <span><strong>/</strong></span>
+	  <button type="button" class="btn btn-info btn-sm"><?php echo "#" . $rank; ?></button>
 	</div>
 	<div class="table-responsive">
 	<table class="table table-hover">
@@ -90,13 +96,12 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
       </thead>
 	  <tbody>
 	  <?php
-	  	$statement = $db->query("SELECT votes, username, content FROM definition WHERE w_id = $id");
-		$j = 1;
+	  	$statement = $db->query("SELECT votes, username, content FROM definition WHERE id = $id");
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
 	
 	  ?>
         <tr>
-          <th scope="row"><span class="label label-primary"><?php echo $j++; ?></span></th>
+          <th scope="row"><span class="label label-primary"><?php echo $rank; ?></span></th>
           <td><?php echo $row['content'];?>
 		  </td>
           <td><?php echo $row['username']; ?></td>

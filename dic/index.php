@@ -68,7 +68,7 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
     <div class="jumbotron">
       <div class="container">
         <h1>One Word, Multiple Definitions</h1>
-        <p>Tired of finding the best (easy to understand) definition over the Internet? WeDefine lets you find and write the best definition. Hop in and join our community now! Share your knowledge with the world.</p>
+        <p>Tired of finding the best (easy to understand) definition over the Internet? WeDefine lets you find and write the best definition for the world. Hop in and join our community now! Share your knowledge with the world.</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
       </div>
     </div>
@@ -101,7 +101,7 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 	  ?>
         <tr>
           <th scope="row"><span class="label label-primary"><?php echo $j + 1; ?></span></th>
-          <td class="appadd"><?php echo $row['content'];?>
+          <td class="appadd"><a class="definition" href="view_definition.php?id=<?php echo $j + 2; ?>&rank=<?php echo $j + 1; ?>"><?php echo $row['content'];?></a>
 		  </td>
           <td><?php echo $row['username']; ?></td>
           <td><?php echo $row['votes'];?></td>

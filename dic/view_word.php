@@ -56,7 +56,7 @@ $id = $_GET['id'];
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
 			<li><a href="index.php">Home</a></li>
-            <li class="active"><a href="#">Browse</a></li>
+            <li class="active"><a href="browse.php">Browse</a></li>
             <li><a href="#contact">Submit</a></li>
 			<li><a href="#contact">About</a></li>
           </ul>
@@ -88,19 +88,20 @@ $id = $_GET['id'];
       </thead>
 	  <tbody>
 	  <?php
-	  	$statement = $db->query("SELECT votes, username, content FROM definition WHERE w_id = $id");
+	  	$statement = $db->query("SELECT votes, username, id, content FROM definition WHERE w_id = $id");
 		$j = 1;
 		while ($row = $statement->fetch(PDO::FETCH_ASSOC))
 		{  
 	  ?>
         <tr>
-          <th scope="row"><span class="label label-primary"><?php echo $j++; ?></span></th>
-          <td class="appadd"><?php echo $row['content'];?>
+          <th scope="row"><span class="label label-primary"><?php echo $j; ?></span></th>
+          <td class="appadd"><a class="definition" href="view_definition.php?id=<?php echo $row['id']; ?>&rank=<?php echo $j; ?>"><?php echo $row['content'];?></a>
 		  </td>
           <td><?php echo $row['username']; ?></td>
           <td><?php echo $row['votes'];?></td>
         </tr>
 	<?php
+		$j++;
 		}
 	?>
       </tbody>
