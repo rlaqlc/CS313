@@ -17,7 +17,7 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 	}
 	
 	$id = $_GET['id'];
-	
+	$rank = $_GET['rank'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
