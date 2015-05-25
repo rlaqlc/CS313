@@ -1,0 +1,101 @@
+.navbar-default .navbar-brand
+{
+	color: #002E5C;
+}
+
+.navbar-default .navbar-brand:hover
+{
+	color: #000066;
+}
+
+ .navbar-default .navbar-nav > .active > a,  .navbar-default .navbar-nav > .active > a:hover{
+	
+ }
+ 
+.jumbotron h1 
+{
+	color: #002E5C;
+ }
+ 
+ .table-hover
+ {
+	margin: 0 auto;
+	width: 84%;
+ }
+ 
+ table 
+ {
+     table-layout: fixed;
+ }
+ th.rank
+ {
+	width: 80px;
+ }
+
+ html 
+ {
+overflow-y: scroll;
+ }
+ 
+ th.definition
+ {
+	width: 850px;
+	    white-space: nowrap;
+    overflow: hidden;
+
+    text-overflow: ellipsis; 
+	
+ }
+ 
+ 
+ .category 
+ {
+	
+	width: 84%;
+	margin: 0 auto;
+	margin-bottom: 14px;
+
+ }
+ 
+  .category2
+ {
+	position: relative;
+	top: 14px;
+	margin-bottom: 10px;
+
+ }
+ 
+ .inlineh3 
+ {
+	display:inline;
+ }
+ 
+  .viewMoreWrapper
+ {
+	
+	width: 84%;
+	margin: 0 auto;
+	margin-top: 12px;
+	margin-bottom: 6px;
+ }
+ 
+ .btn-block {
+    padding: 4px;
+	font-size: 19px;
+}
+.appadd{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	}
+	
+.wrapper
+{
+margin: 0 auto;
+	margin-top: 60px;
+	width: 84%;
+}
+
+.emptyspace{
+	height: 74px;
+}
