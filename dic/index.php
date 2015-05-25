@@ -68,7 +68,7 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
     <div class="jumbotron">
       <div class="container">
         <h1>One Word, Multiple Definitions</h1>
-        <p>Tired of finding the best (easy to understand) definition over the Internet? WeDefine lets you find and write the best definition for the world. Hop in and join our community now! Share your knowledge with the world.</p>
+        <p>Tired of finding the best (easy to understand) definition over the Internet? WeDefine lets you find and write the best definition. Hop in and join our community now! Share your knowledge with the world.</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
       </div>
     </div>

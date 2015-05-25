@@ -15,7 +15,7 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 		echo "Error: ". $ex->getMessage();
 		die();
 	}
-
+$id = $_GET['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
