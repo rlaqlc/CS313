@@ -75,6 +75,8 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
 	  ?>		
 	<div class="category">
+	<div class="row">
+	  <div class="col-md-10">
 	  <h4 class="inlineh3"><strong>Category:</strong></h4>
 	  <button type="button" class="btn btn-info btn-sm">All</button>
 	  <span><strong>/</strong></span>
@@ -83,6 +85,8 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 	  <button type="button" class="btn btn-info btn-sm"><?php echo $row['word']; ?></button>
 	  <span><strong>/</strong></span>
 	  <button type="button" class="btn btn-info btn-sm"><?php echo "#" . $rank; ?></button>
+	  </div>
+	</div>
 	</div>
 	<div class="table-responsive">
 	<table class="table table-hover">
@@ -98,7 +102,6 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 	  <?php
 	  	$statement = $db->query("SELECT votes, username, content FROM definition WHERE id = $id");
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
-	
 	  ?>
         <tr>
           <th scope="row"><span class="label label-primary"><?php echo $rank; ?></span></th>
@@ -107,10 +110,63 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
           <td><?php echo $row['username']; ?></td>
           <td><?php echo $row['votes'];?></td>
         </tr>
-
-      </tbody>
+		
+      </tbody> 
 	</table>
 	</div>
+	<div class="voteWrapper">
+		<button type="button" class="btn btn-success btn-sm">
+		  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Favorite
+		</button>
+		<button type="button" class="btn btn-warning btn-sm">
+		  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Vote
+		</button>
+	</div>
+	<hr />
+	<!-- comment text area -->
+	<div class="commentWrapper">
+		<textarea placeholder="Share your thoughts" class="form-control" rows="2"></textarea>
+	</div>
+	<div class="commentButtonWrapper">
+		<a href="view_word.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-lg btn-block" role="button">Submit Comment</a>
+	</div>
+	<div class="panel panel-default">
+	  <!-- Default panel contents -->
+	  <div class="panel-body"><strong>User Comments</strong></div>
+	  <!-- Table -->
+	  <div class="table-responsive">
+	  <table class="table">
+		<thead>
+        <tr>
+          <th class="rank">#</th>
+          <th class="definition">Comments</th>
+          <th>Date</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+	  <tbody>
+		<tr>
+			<td>1</td>
+			<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac ex sodales justo gravida imperdiet eget sit amet nulla. Morbi a justo nec nunc finibus placerat sit amet eu nunc. Ut convallis scelerisque massa, id ultricies est maximus nec. Fusce turpis lectus, volutpat nec vestibulum non, ullamcorper volutpat massa. Sed tincidunt lorem arcu, a condimentum orci condimentum pulvinar. Nunc laoreet dictum lacus at fringilla. Cras vehicula pretium urna eget sodales.</td>
+			<td>5/25/2015</td>
+			<td>semperfi.jay</td>
+			
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac ex sodales justo gravida imperdiet eget sit amet nulla. Morbi a justo nec nunc finibus placerat sit amet eu nunc. Ut convallis scelerisque massa, id ultricies est maximus nec. Fusce turpis lectus, volutpat nec vestibulum non, ullamcorper volutpat massa. Sed tincidunt lorem arcu, a condimentum orci condimentum pulvinar. Nunc laoreet dictum lacus at fringilla. Cras vehicula pretium urna eget sodales.</td>
+			<td>5/26/2015</td>
+			<td>rlaqlc</td>
+			
+		</tr>
+	  </tbody>
+	  </table>
+	</div>
+	</div>
+	<br />
+	<br />
+	<br />
+	
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
