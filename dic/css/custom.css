@@ -50,7 +50,6 @@ overflow-y: scroll;
  
  .category 
  {
-	
 	width: 84%;
 	margin: 0 auto;
 	margin-bottom: 14px;
@@ -116,4 +115,34 @@ margin: 0 auto;
 
 .definition:active {
     text-decoration: underline;
+}
+
+.panel-default {
+	margin: 0 auto;
+	margin-top: 15px;
+	width: 84%;
+}
+
+.panel-heading {
+	height: 40px;
+}
+
+.voteWrapper {
+	width: 84%;
+	margin: 0 auto;
+	margin-top: 15px;
+	
+	
+}
+
+.commentWrapper {
+	width: 84%;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.commentButtonWrapper {
+	width: 84%;
+	margin: 0 auto;
+	margin-top: 7px;
 }
