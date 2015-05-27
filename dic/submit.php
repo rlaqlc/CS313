@@ -15,7 +15,7 @@
 		echo "Error: ". $ex->getMessage();
 		die();
 	}
-$id = $_GET['id'];
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,56 +56,94 @@ $id = $_GET['id'];
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
 			<li><a href="index.php">Home</a></li>
-            <li class="active"><a href="browse.php">Browse</a></li>
-            <li><a href="submit.php">Submit</a></li>
+            <li><a href="browse.php">Browse</a></li>
+            <li class="active"><a href="submit.php">Submit</a></li>
 			<li><a href="#contact">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-	<div class="emptyspace"></div>
-	  <?php
-	  	$statement = $db->query("SELECT word FROM word WHERE id=". $_GET['id']);
-		$row = $statement->fetch(PDO::FETCH_ASSOC);
-	  ?>		
-	<div class="category">
+	
+  <div class="wrapper">
+  	<div class="category2">
+	<div class="alert alert-success" role="alert">Please choose one of the following to write a definition.</div>
 	  <h4 class="inlineh3"><strong>Category:</strong></h4>
 	  <button type="button" class="btn btn-info btn-sm">All</button>
 	  <span><strong>/</strong></span>
 	  <button type="button" class="btn btn-info btn-sm">Computer Science</button>
-	  <span><strong>/</strong></span>
-	  <button type="button" class="btn btn-info btn-sm"><?php echo $row['word']; ?></button>
 	</div>
-	<div class="table-responsive">
-	<table class="table table-hover">
-		<thead>
-        <tr>
-          <th class="rank">Rank</th>
-          <th class="definition">Definition</th>
-          <th>Username</th>
-          <th>Votes</th>
-        </tr>
-      </thead>
-	  <tbody>
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-12">
+          <h2>A</h2>
+   <ul class="list-group">
 	  <?php
-	  	$statement = $db->query("SELECT votes, username, id, content FROM definition WHERE w_id = $id");
-		$j = 1;
+	  	$statement = $db->query('SELECT * FROM word where word like "A%"');
 		while ($row = $statement->fetch(PDO::FETCH_ASSOC))
-		{  
-	  ?>
-        <tr>
-          <th scope="row"><span class="label label-primary"><?php echo $j; ?></span></th>
-          <td class="appadd"><a class="definition" href="view_definition.php?id=<?php echo $row['id']; ?>&rank=<?php echo $j; ?>"><?php echo $row['content'];?></a>
-		  </td>
-          <td><?php echo $row['username']; ?></td>
-          <td><?php echo $row['votes'];?></td>
-        </tr>
-	<?php
-		$j++;
+		{ 
+			$statement0 = $db->query("SELECT count(*) AS total from definition WHERE w_id=". $row['id']);
+			$count = $statement0->fetch(PDO::FETCH_ASSOC);
+		?>
+	  <li class="list-group-item"><span class="badge"><?php echo $count['total']; ?></span><a href="submit_definition.php?id=<?php echo $row['id']; ?>"><?php echo $row['word']?></a></li>
+	  <?php
+	
 		}
-	?>
-      </tbody>
-	</table>
+	  ?>   
+	</ul>
+        </div>
+        <div class="col-md-12">
+          <h2>B</h2>
+   <ul class="list-group">
+	  <?php
+	  	$statement = $db->query('SELECT * FROM word where word like "B%"');
+		while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+		{ 
+			$statement0 = $db->query("SELECT count(*) AS total from definition WHERE w_id=". $row['id']);
+			$count = $statement0->fetch(PDO::FETCH_ASSOC);
+		?>
+	  <li class="list-group-item"><span class="badge"><?php echo $count['total']; ?></span><a href="submit_definition.php?id=<?php echo $row['id']; ?>"><?php echo $row['word']?></a></li>
+	  <?php
+	
+		}
+	  ?>     
+	</ul>
+        </div>      
+        <div class="col-md-12">
+          <h2>C</h2>
+   <ul class="list-group">
+	  <?php
+	  	$statement = $db->query('SELECT * FROM word where word like "C%"');
+		while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+		{ 
+			$statement0 = $db->query("SELECT count(*) AS total from definition WHERE w_id=". $row['id']);
+			$count = $statement0->fetch(PDO::FETCH_ASSOC);
+		?>
+	  <li class="list-group-item"><span class="badge"><?php echo $count['total']; ?></span><a href="submit_definition.php?id=<?php echo $row['id']; ?>"><?php echo $row['word']?></a></li>
+	  <?php
+	
+		}
+	  ?> 
+	</ul>
+        </div>  
+		        <div class="col-md-12">
+          <h2>D</h2>
+   <ul class="list-group">
+	  <?php
+	  	$statement = $db->query('SELECT * FROM word where word like "D%"');
+		while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+		{ 
+			$statement0 = $db->query("SELECT count(*) AS total from definition WHERE w_id=". $row['id']);
+			$count = $statement0->fetch(PDO::FETCH_ASSOC);
+		?>
+	  <li class="list-group-item"><span class="badge"><?php echo $count['total']; ?></span><a href="submit_definition.php?id=<?php echo $row['id']; ?>"><?php echo $row['word']?></a></li>
+	  <?php
+	
+		}
+	  ?> 	  
+	</ul>
+        </div>  
+      </div>
+      </div>
 	</div>
     <!-- Bootstrap core JavaScript
     ================================================== -->

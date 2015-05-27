@@ -59,7 +59,7 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
           <ul class="nav navbar-nav">
 			<li><a href="index.php">Home</a></li>
             <li class="active"><a href="browse.php">Browse</a></li>
-            <li><a href="#contact">Submit</a></li>
+            <li><a href="submit.php">Submit</a></li>
 			<li><a href="#contact">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->

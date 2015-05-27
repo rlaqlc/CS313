@@ -15,7 +15,20 @@
 		echo "Error: ". $ex->getMessage();
 		die();
 	}
-$id = $_GET['id'];
+	
+	$id = $_POST['id'];
+	$content = $_POST['definition'];
+	
+	$statement1 = $db->query("SELECT id FROM definition ORDER BY id DESC LIMIT 1");
+	$count1 = $statement1->fetch(PDO::FETCH_ASSOC);
+	
+	$statement2 = $db->query("SELECT count(*) AS total from definition WHERE w_id=" . $id);
+	$count2 = $statement2->fetch(PDO::FETCH_ASSOC);
+	$total = $count1['id'];
+	$total2 = $count2['total'];
+	$total++;
+	$total2++;
+	header("refresh:3;url=view_definition.php?id=" . $total . "&rank=" . $total2);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,56 +69,25 @@ $id = $_GET['id'];
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
 			<li><a href="index.php">Home</a></li>
-            <li class="active"><a href="browse.php">Browse</a></li>
-            <li><a href="submit.php">Submit</a></li>
+            <li><a href="browse.php">Browse</a></li>
+            <li class="active"><a href="submit.php">Submit</a></li>
 			<li><a href="#contact">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-	<div class="emptyspace"></div>
-	  <?php
-	  	$statement = $db->query("SELECT word FROM word WHERE id=". $_GET['id']);
-		$row = $statement->fetch(PDO::FETCH_ASSOC);
-	  ?>		
-	<div class="category">
-	  <h4 class="inlineh3"><strong>Category:</strong></h4>
-	  <button type="button" class="btn btn-info btn-sm">All</button>
-	  <span><strong>/</strong></span>
-	  <button type="button" class="btn btn-info btn-sm">Computer Science</button>
-	  <span><strong>/</strong></span>
-	  <button type="button" class="btn btn-info btn-sm"><?php echo $row['word']; ?></button>
-	</div>
-	<div class="table-responsive">
-	<table class="table table-hover">
-		<thead>
-        <tr>
-          <th class="rank">Rank</th>
-          <th class="definition">Definition</th>
-          <th>Username</th>
-          <th>Votes</th>
-        </tr>
-      </thead>
-	  <tbody>
-	  <?php
-	  	$statement = $db->query("SELECT votes, username, id, content FROM definition WHERE w_id = $id");
-		$j = 1;
-		while ($row = $statement->fetch(PDO::FETCH_ASSOC))
-		{  
-	  ?>
-        <tr>
-          <th scope="row"><span class="label label-primary"><?php echo $j; ?></span></th>
-          <td class="appadd"><a class="definition" href="view_definition.php?id=<?php echo $row['id']; ?>&rank=<?php echo $j; ?>"><?php echo $row['content'];?></a>
-		  </td>
-          <td><?php echo $row['username']; ?></td>
-          <td><?php echo $row['votes'];?></td>
-        </tr>
+	<div class="wrapper">
+	<div class="category2">
 	<?php
-		$j++;
-		}
+	  	$statement = $db->query("INSERT into definition (w_id, content, username, date) VALUES ('".$id."'," . "'".$content  . "', 'Annonymous'," . "'5/26/2015')");
+		
+		if ($statement) {
 	?>
-      </tbody>
-	</table>
+		<div class="alert alert-success" role="alert">Your definition has been submitted! Your will be redirected to your definition page in 3 seconds.</div>
+	<?php
+		}
+	?>		
+	</div>
 	</div>
     <!-- Bootstrap core JavaScript
     ================================================== -->

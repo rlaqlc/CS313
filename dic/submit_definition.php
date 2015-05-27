@@ -1,21 +1,22 @@
 <?php
 	try
 	{
-define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
-define('DB_PORT',getenv('OPENSHIFT_MYSQL_DB_PORT')); 
-define('DB_USER',getenv('OPENSHIFT_MYSQL_DB_USERNAME'));
-define('DB_PASS',getenv('OPENSHIFT_MYSQL_DB_PASSWORD'));
-define('DB_NAME',getenv('OPENSHIFT_GEAR_NAME'));
+		define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
+		define('DB_PORT',getenv('OPENSHIFT_MYSQL_DB_PORT')); 
+		define('DB_USER',getenv('OPENSHIFT_MYSQL_DB_USERNAME'));
+		define('DB_PASS',getenv('OPENSHIFT_MYSQL_DB_PASSWORD'));
+		define('DB_NAME',getenv('OPENSHIFT_GEAR_NAME'));
 
-$dsn = 'mysql:dbname='.DB_NAME.';host='.DB_HOST.';port='.DB_PORT;
-$db = new PDO($dsn, DB_USER, DB_PASS);
+		$dsn = 'mysql:dbname='.DB_NAME.';host='.DB_HOST.';port='.DB_PORT;
+		$db = new PDO($dsn, DB_USER, DB_PASS);
 	}
 	catch (PDOException $ex)
 	{
 		echo "Error: ". $ex->getMessage();
 		die();
 	}
-
+	
+	$id = $_GET['id'];
 	
 ?>
 <!DOCTYPE html>
@@ -56,68 +57,42 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">Home</a></li>
+			<li><a href="index.php">Home</a></li>
             <li><a href="browse.php">Browse</a></li>
-            <li><a href="submit.php">Submit</a></li>
+            <li class="active"><a href="submit.php">Submit</a></li>
 			<li><a href="#contact">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-	    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>One Word, Multiple Definitions</h1>
-        <p>Tired of finding the best (easy to understand) definition over the Internet? WeDefine lets you find and write the best definition for the world. Hop in and join our community now! Share your knowledge with the world.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-      </div>
-    </div>
+	<div class="emptyspace"></div>
+	  <?php
+	  	$statement = $db->query("SELECT word FROM word WHERE id=". $_GET['id']);
+		$row = $statement->fetch(PDO::FETCH_ASSOC);
+	  ?>		
 	<div class="category">
-		<h4 class="inlineh3"><strong>Category:</strong></h4>
+	<div class="row">
+	  <div class="col-md-10">
+	  <h4 class="inlineh3"><strong>Category:</strong></h4>
 	  <button type="button" class="btn btn-info btn-sm">All</button>
 	  <span><strong>/</strong></span>
 	  <button type="button" class="btn btn-info btn-sm">Computer Science</button>
 	  <span><strong>/</strong></span>
-	  <button type="button" class="btn btn-info btn-sm">Applet</button>
+	  <button type="button" class="btn btn-info btn-sm"><?php echo $row['word']; ?></button>
+	  </div>
 	</div>
-	<div class="table-responsive">
-	<table class="table table-hover">
-		<thead>
-        <tr>
-          <th class="rank">Rank</th>
-          <th class="definition">Definition</th>
-          <th>Username</th>
-          <th>Votes</th>
-        </tr>
-      </thead>
-	  <tbody>
-	  <?php
-	  	$statement = $db->query('SELECT votes, username, content FROM definition WHERE w_id = 4');
-		
-		for($j = 0; $j < 5; $j++)
-		{	  
-			$row = $statement->fetch(PDO::FETCH_ASSOC);
-		
-	  ?>
-        <tr>
-          <th scope="row"><span class="label label-primary"><?php echo $j + 1; ?></span></th>
-          <td class="appadd"><a class="definition" href="view_definition.php?id=<?php echo $j + 2; ?>&rank=<?php echo $j + 1; ?>"><?php echo $row['content'];?></a>
-		  </td>
-          <td><?php echo $row['username']; ?></td>
-          <td><?php echo $row['votes'];?></td>
-        </tr>
-	<?php
-		}
-		
-		$statement = $db->query("SELECT id FROM word WHERE word='Applet'");
-		$row = $statement->fetch(PDO::FETCH_ASSOC);
-	?>	
-      </tbody>
-	</table>
 	</div>
-	<div class="viewMoreWrapper">
-	<a href="view_word.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-lg btn-block" role="button">View More Definitions</a>
-	</div>
+	<form action="add_definition.php" method="POST">
+		<!-- comment text area -->
+		<div class="commentWrapper">
+			<textarea placeholder="Write a definition" class="form-control" name="definition" rows="10"></textarea>
+		</div>
+		<input type="hidden" name="id" value="<?php echo $id; ?>" />
+		<div class="commentButtonWrapper">
+			<input type="submit" class="btn btn-primary btn-lg btn-block" value="Submit Definition">
+		</div>
+	</form>
+	<br />
 	<br />
 	<br />
     <!-- Bootstrap core JavaScript

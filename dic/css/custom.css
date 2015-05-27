@@ -59,7 +59,7 @@ overflow-y: scroll;
   .category2
  {
 	position: relative;
-	top: 14px;
+	top: 8px;
 	margin-bottom: 10px;
 
  }
@@ -144,5 +144,5 @@ margin: 0 auto;
 .commentButtonWrapper {
 	width: 84%;
 	margin: 0 auto;
-	margin-top: 7px;
+	margin-top: 10px;
 }
