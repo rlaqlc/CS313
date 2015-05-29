@@ -58,14 +58,21 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
 			<li><a href="index.php">Home</a></li>
-            <li class="active"><a href="browse.php">Browse</a></li>
+			<li class="dropdown active">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Browse <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">All</a></li>
+				  <li class="divider"></li>
+                  <li><a href="browse.php">Computer Science</a></li>
+				  <li><a href="#">Test Category</a></li>
+                </ul>
+            </li>
             <li><a href="submit.php">Submit</a></li>
 			<li><a href="#contact">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-	<div class="emptyspace"></div>
 	  <?php
 	  	$statement = $db->query("SELECT w_id FROM definition WHERE id=". $_GET['id']);
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
@@ -74,9 +81,16 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 		$statement = $db->query("SELECT word FROM word WHERE id=" . $wordID);
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
 	  ?>		
-	<div class="category">
-	<div class="row">
-	  <div class="col-md-10">
+	<div class="wrapper">
+	<div class="category2">
+	<div id="notification">
+	<?php
+		if (isset($_POST['notify']))
+		{
+			echo "<div class=\"alert alert-success\" role=\"alert\">You have successfully voted for this definition!</div>";
+		}
+	?>
+	</div>
 	  <h4 class="inlineh3"><strong>Category:</strong></h4>
 	  <button type="button" class="btn btn-info btn-sm">All</button>
 	  <span><strong>/</strong></span>
@@ -85,7 +99,6 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 	  <button type="button" class="btn btn-info btn-sm"><?php echo $row['word']; ?></button>
 	  <span><strong>/</strong></span>
 	  <button type="button" class="btn btn-info btn-sm"><?php echo "#" . $rank; ?></button>
-	  </div>
 	</div>
 	</div>
 	<div class="table-responsive">
@@ -114,14 +127,23 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
       </tbody> 
 	</table>
 	</div>
-	<div class="voteWrapper">
-		<button type="button" class="btn btn-success btn-sm">
-		  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Favorite
-		</button>
-		<button type="button" class="btn btn-warning btn-sm">
-		  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Vote
-		</button>
-	</div>
+	<form action="" method="POST">
+		<div class="voteWrapper">
+			<button type="submit" class="btn btn-success btn-sm">
+			  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Favorite
+			</button>
+			<button type="submit" name="vote" onclick="notify()" class="btn btn-warning btn-sm">
+			  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Vote
+			</button>
+			<input type="hidden" name="notify" value="dummy" />
+		</div>
+	</form>
+	<?php 
+		if (isset($_POST['vote']))
+		{
+			$statement = $db->query("UPDATE definition SET votes = votes + 1 WHERE id = " . $_GET['id']);
+		}
+	?>
 	<hr />
 	<!-- comment text area -->
 	<div class="commentWrapper">

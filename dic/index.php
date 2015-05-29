@@ -18,7 +18,7 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 
 	
 ?>
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -56,11 +56,30 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">Home</a></li>
-            <li><a href="browse.php">Browse</a></li>
+            <li class="active"><a href="#">Home</a></li>
+			<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Browse <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">All</a></li>
+				  <li class="divider"></li>
+                  <li><a href="browse.php">Computer Science</a></li>
+				  <li><a href="#">Test Category</a></li>
+                </ul>
+            </li>
             <li><a href="submit.php">Submit</a></li>
-			<li><a href="#contact">About</a></li>
+			<li><a href="#contact">Account</a></li>
           </ul>
+		  	<ul class="nav navbar-nav navbar-right">
+
+			<form class="navbar-form" role="search">
+				<div class="form-group">
+				<div class="input-group-sm">
+				<input type="text" class="form-control">
+				</div>
+				</div>
+				<button type="submit" class="btn btn-default btn-sm">Search</button>
+			</form>	
+			</ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -72,13 +91,18 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
       </div>
     </div>
+	<?php
+		$number = mt_rand(1, 13);
+	  	$statement = $db->query("SELECT word FROM word WHERE id=4");
+		$row = $statement->fetch(PDO::FETCH_ASSOC);
+	?>
 	<div class="category">
 		<h4 class="inlineh3"><strong>Category:</strong></h4>
 	  <button type="button" class="btn btn-info btn-sm">All</button>
 	  <span><strong>/</strong></span>
 	  <button type="button" class="btn btn-info btn-sm">Computer Science</button>
 	  <span><strong>/</strong></span>
-	  <button type="button" class="btn btn-info btn-sm">Applet</button>
+	  <button type="button" class="btn btn-info btn-sm"><?php echo $row['word']; ?></button>
 	</div>
 	<div class="table-responsive">
 	<table class="table table-hover">
@@ -91,8 +115,10 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
         </tr>
       </thead>
 	  <tbody>
+	  
 	  <?php
-	  	$statement = $db->query('SELECT votes, username, content FROM definition WHERE w_id = 4');
+		
+	  	$statement = $db->query('SELECT id, votes, username, content FROM definition WHERE w_id = 4 ORDER BY votes DESC');
 		
 		for($j = 0; $j < 5; $j++)
 		{	  
@@ -101,7 +127,7 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 	  ?>
         <tr>
           <th scope="row"><span class="label label-primary"><?php echo $j + 1; ?></span></th>
-          <td class="appadd"><a class="definition" href="view_definition.php?id=<?php echo $j + 2; ?>&rank=<?php echo $j + 1; ?>"><?php echo $row['content'];?></a>
+          <td class="appadd"><a class="definition" href="view_definition.php?id=<?php echo $row['id']; ?>&rank=<?php echo $j + 1; ?>"><?php echo $row['content'];?></a>
 		  </td>
           <td><?php echo $row['username']; ?></td>
           <td><?php echo $row['votes'];?></td>

@@ -56,7 +56,15 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
 			<li><a href="index.php">Home</a></li>
-            <li><a href="browse.php">Browse</a></li>
+			<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Browse <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">All</a></li>
+				  <li class="divider"></li>
+                  <li><a href="browse.php">Computer Science</a></li>
+				  <li><a href="#">Test Category</a></li>
+                </ul>
+            </li>
             <li class="active"><a href="submit.php">Submit</a></li>
 			<li><a href="#contact">About</a></li>
           </ul>
