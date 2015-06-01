@@ -1,4 +1,5 @@
 <?php
+session_start();
 	try
 	{
 define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
@@ -68,7 +69,22 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
                 </ul>
             </li>
             <li><a href="submit.php">Submit</a></li>
-			<li><a href="#contact">About</a></li>
+			<li>
+			<?php
+			if (isset($_SESSION['last_name']))
+			{
+			?>
+			<a href="#"><?php echo "You are signed in as <strong>" . $_SESSION['last_name'] . "</strong>";?></a>
+			<?php
+			}
+			else
+			{
+			?>
+			<a href="signin.php"><?php echo 'Sign in';?></a>
+			<?php
+			}
+			?>
+			</li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

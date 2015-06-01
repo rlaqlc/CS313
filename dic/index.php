@@ -1,4 +1,5 @@
 <?php
+session_start();
 	try
 	{
 define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
@@ -28,7 +29,7 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Fixed Top Navbar Example for Bootstrap</title>
+    <title>WeDefine</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -67,7 +68,22 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
                 </ul>
             </li>
             <li><a href="submit.php">Submit</a></li>
-			<li><a href="#contact">Account</a></li>
+			<li>
+			<?php
+			if (isset($_SESSION['last_name']))
+			{
+			?>
+			<a href="#"><?php echo "You are signed in as <strong>" . $_SESSION['last_name'] . "</strong>";?></a>
+			<?php
+			}
+			else
+			{
+			?>
+			<a href="signin.php"><?php echo 'Sign in';?></a>
+			<?php
+			}
+			?>
+			</li>
           </ul>
 		  	<ul class="nav navbar-nav navbar-right">
 
@@ -87,7 +103,7 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
     <div class="jumbotron">
       <div class="container">
         <h1>One Word, Multiple Definitions</h1>
-        <p>Tired of finding the best (easy to understand) definition over the Internet? WeDefine lets you find and write the best definition for the world. Hop in and join our community now! Share your knowledge with the world.</p>
+        <p>Tired of finding the best (easy to understand) definition over the Internet? WeDefine lets you find and write the best definition. Hop in and join our community now! Share your knowledge with the world.</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
       </div>
     </div>

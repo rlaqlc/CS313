@@ -1,4 +1,5 @@
 <?php
+session_start();
 	try
 	{
 		define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
@@ -66,23 +67,39 @@ $id = $_GET['id'];
                 </ul>
             </li>
             <li><a href="submit.php">Submit</a></li>
-			<li><a href="#contact">About</a></li>
+			<li>
+			<?php
+			if (isset($_SESSION['last_name']))
+			{
+			?>
+			<a href="#"><?php echo "You are signed in as <strong>" . $_SESSION['last_name'] . "</strong>";?></a>
+			<?php
+			}
+			else
+			{
+			?>
+			<a href="signin.php"><?php echo 'Sign in';?></a>
+			<?php
+			}
+			?>
+			</li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-	<div class="emptyspace"></div>
 	  <?php
 	  	$statement = $db->query("SELECT word FROM word WHERE id=". $_GET['id']);
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
 	  ?>		
-	<div class="category">
+	  <div class="wrapper">
+	<div class="category2">
 	  <h4 class="inlineh3"><strong>Category:</strong></h4>
 	  <button type="button" class="btn btn-info btn-sm">All</button>
 	  <span><strong>/</strong></span>
 	  <button type="button" class="btn btn-info btn-sm">Computer Science</button>
 	  <span><strong>/</strong></span>
 	  <button type="button" class="btn btn-info btn-sm"><?php echo $row['word']; ?></button>
+	</div>
 	</div>
 	<div class="table-responsive">
 	<table class="table table-hover">

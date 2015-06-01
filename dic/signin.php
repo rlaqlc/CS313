@@ -15,7 +15,94 @@
 		echo "Error: ". $ex->getMessage();
 		die();
 	}
-	?>
+if (isset($_POST['formsubmitted'])) {
+    // Initialize a session:
+	session_start();
+    $error = array();//this aaray will store all error messages
+  
+
+    if (empty($_POST['e-mail'])) {//if the email supplied is empty 
+        $error[] = 'You forgot to enter  your Email ';
+    } else {
+
+
+        if (preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $_POST['e-mail'])) {
+           
+            $Email = $_POST['e-mail'];
+			
+        } else {
+             $error[] = 'Your EMail Address is invalid  ';
+        }
+
+
+    }
+
+
+    if (empty($_POST['Password'])) {
+        $error[] = 'Please Enter Your Password ';
+    } else {
+        $Password = $_POST['Password'];
+    }
+
+
+       if (empty($error))//if the array is empty , it means no error found
+    { 
+
+       	$query = 'SELECT * FROM person WHERE (email=:email AND password=:password)';
+		$statement = $db->prepare($query);
+		$statement->bindParam(':email', $Email);
+		$statement->bindParam(':password', $Password);
+		$statement->execute();
+		$count = $statement->rowCount();
+        if(!$statement){//If the QUery Failed 
+            echo 'Query Failed ';
+        }
+
+        if ($count == 1)//if Query is successfull 
+        { // A match was made.
+
+           
+
+
+            $_SESSION = $statement->fetch(PDO::FETCH_ASSOC);
+           
+            header("Location: index.php");
+          
+
+        }else
+        { 
+            
+            $msg_error= 'Email address /Password is Incorrect';
+        }
+
+    }  else {
+        
+        
+
+echo '<div class="errormsgbox"> <ol>';
+        foreach ($error as $key => $values) {
+            
+            echo '	<li>'.$values.'</li>';
+
+
+       
+        }
+        echo '</ol></div>';
+
+    }
+    
+    
+    if(isset($msg_error)){
+        
+        echo '<div class="warning">'.$msg_error.' </div>';
+    }
+    /// var_dump($error);
+
+} // End of the main Submit conditional.
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,18 +135,19 @@
 
   <body>
     <div class="container">
-      <form class="form-signin">
+      <form class="form-signin" action="signin.php" method="POST">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="e-mail" class="sr-only">Email address</label>
+        <input type="email" id="e-mail" name="e-mail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="Password" class="sr-only">Password</label>
+        <input type="password" id="Password" name="Password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		<input type="hidden" name="formsubmitted" value="TRUE" />
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
       </form>
     </div> <!-- /container -->
 	<div id="createAnAccount">

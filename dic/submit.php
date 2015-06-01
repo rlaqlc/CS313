@@ -1,4 +1,5 @@
 <?php
+session_start();
 	try
 	{
 		define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
@@ -66,14 +67,29 @@
                 </ul>
             </li>
             <li class="active"><a href="submit.php">Submit</a></li>
-			<li><a href="#contact">About</a></li>
+			<li>
+			<?php
+			if (isset($_SESSION['last_name']))
+			{
+			?>
+			<a href="#"><?php echo "You are signed in as <strong>" . $_SESSION['last_name'] . "</strong>";?></a>
+			<?php
+			}
+			else
+			{
+			?>
+			<a href="signin.php"><?php echo 'Sign in';?></a>
+			<?php
+			}
+			?>
+			</li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 	
   <div class="wrapper">
-  	<div class="category2">
+  	<div class="category3">
 	<div class="alert alert-success" role="alert">Please choose one of the following to write a definition.</div>
 	  <h4 class="inlineh3"><strong>Category:</strong></h4>
 	  <button type="button" class="btn btn-info btn-sm">All</button>

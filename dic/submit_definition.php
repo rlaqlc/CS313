@@ -1,4 +1,8 @@
 <?php
+session_start();
+    if(!isset($_SESSION['user_name'])){
+         header("Location: signin.php");
+    }
 	try
 	{
 		define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
@@ -68,17 +72,32 @@
                 </ul>
             </li>
             <li class="active"><a href="submit.php">Submit</a></li>
-			<li><a href="#contact">About</a></li>
+			<li>
+			<?php
+			if (isset($_SESSION['last_name']))
+			{
+			?>
+			<a href="#"><?php echo "You are signed in as <strong>" . $_SESSION['last_name'] . "</strong>";?></a>
+			<?php
+			}
+			else
+			{
+			?>
+			<a href="signin.php"><?php echo 'Sign in';?></a>
+			<?php
+			}
+			?>
+			</li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-	<div class="emptyspace"></div>
 	  <?php
 	  	$statement = $db->query("SELECT word FROM word WHERE id=". $_GET['id']);
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
 	  ?>		
-	<div class="category">
+	<div class="wrapper">
+	<div class="category2">
 	<div class="row">
 	  <div class="col-md-10">
 	  <h4 class="inlineh3"><strong>Category:</strong></h4>
@@ -90,7 +109,8 @@
 	  </div>
 	</div>
 	</div>
-	<form action="add_definition.php" method="POST">
+	</div>
+	<form class="submitForm" action="add_definition.php" method="POST">
 		<!-- comment text area -->
 		<div class="commentWrapper">
 			<textarea placeholder="Write a definition" class="form-control" name="definition" rows="10"></textarea>

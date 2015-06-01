@@ -17,13 +17,14 @@
 	}
 	
 	
+
 date_default_timezone_set('UTC');
 
 //This is the address that will appear coming from ( Sender )
 define('EMAIL', 'clqalr@gmail.com');
 
 /*Define the root url where the script will be found such as http://website.com or http://website.com/Folder/ */
-DEFINE('WEBSITE_URL', 'http://php-bitkim.rhcloud.com/dic/');
+DEFINE('WEBSITE_URL', 'http://localhost');
 	
 	if (isset($_POST['formsubmitted'])) {
     $error = array();//Declare An Array to store any error message  
@@ -84,18 +85,14 @@ DEFINE('WEBSITE_URL', 'http://php-bitkim.rhcloud.com/dic/');
 
         if ($count == 0) { // IF no previous user is using this email .
 
-            // Create a unique  activation code:
-            $activation = md5(uniqid(rand(), true));
 
-
-			$query2 = 'INSERT INTO person (first_name, last_name, user_name, email, password, activation) VALUES (:first_name, :last_name, :user_name, :email, :password, :activation)';
+			$query2 = 'INSERT INTO person (first_name, last_name, user_name, email, password) VALUES (:first_name, :last_name, :user_name, :email, :password)';
 			$statement2 = $db->prepare($query2);
 			$statement2->bindParam(':first_name', $firstName);
 			$statement2->bindParam(':last_name', $lastName);
 			$statement2->bindParam(':user_name', $userName);
 			$statement2->bindParam(':email', $Email);
 			$statement2->bindParam(':password', $Password);
-			$statement2->bindParam(':activation', $activation);
 			$statement2->execute();
            
 		   $count2 = $statement2->rowCount();
@@ -106,20 +103,13 @@ DEFINE('WEBSITE_URL', 'http://php-bitkim.rhcloud.com/dic/');
             }
 			
             if ($count2 == 1) { //If the Insert Query was successfull.
-                // Send the email:
-                $message = " To activate your account, please click on this link:\n\n";
-                $message .= WEBSITE_URL . '/activate.php?email=' . urlencode($Email) . "&key=$activation";
-                mail('clqalr@gmail.com', 'Registration Confirmation', $message);
-
-                // Flush the buffered output.
-
+		
 
                 // Finish the page:
                 echo '<div class="success">Thank you for
-registering! A confirmation email
-has been sent to '.$Email.' Please click on the Activation Link to Activate your account </div>';
+registering!  </div>';
 
-
+         header("refresh:3;url=index.php");
             } else { // If it did not run OK.
                 echo '<div class="errormsgbox">You could not be registered due to a system
 error. We apologize for any
