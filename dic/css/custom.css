@@ -1,5 +1,6 @@
 .navbar-default .navbar-brand
 {
+	
 	color: #002E5C;
 }
 
@@ -20,7 +21,7 @@
  .table-hover
  {
 	margin: 0 auto;
-	width: 84%;
+	width: 1150px;
  }
  
  table 
@@ -30,6 +31,16 @@
  th.rank
  {
 	width: 80px;
+ }
+ 
+ th.username 
+ {
+ width: 50px;
+ }
+ 
+ th.vote
+ {
+ width: 100px;
  }
 
  html 
@@ -52,7 +63,7 @@ overflow-y: scroll;
  {
 	position: relative;
 	top: -13px;
-	width: 84%;
+	width: 1150px;
 	margin: 0 auto;
 	margin-bottom: -1px;
 
@@ -87,7 +98,7 @@ overflow-y: scroll;
   .viewMoreWrapper
  {
 	
-	width: 84%;
+	width: 1150px;
 	margin: 0 auto;
 	margin-top: 12px;
 	margin-bottom: 6px;
@@ -107,7 +118,7 @@ overflow-y: scroll;
 {
 margin: 0 auto;
 	margin-top: 60px;
-	width: 84%;
+	width: 1150px;
 }
 
 .emptyspace{
@@ -135,7 +146,7 @@ margin: 0 auto;
 .panel-default {
 	margin: 0 auto;
 	margin-top: 15px;
-	width: 84%;
+	width: 1150px;
 }
 
 .panel-heading {
@@ -143,7 +154,7 @@ margin: 0 auto;
 }
 
 .voteWrapper {
-	width: 84%;
+	width: 1150px;
 	margin: 0 auto;
 	margin-top: 15px;
 	
@@ -151,13 +162,13 @@ margin: 0 auto;
 }
 
 .commentWrapper {
-	width: 84%;
+	width: 1150px;
 	margin: 0 auto;
 	margin-top: 20px;
 }
 
 .commentButtonWrapper {
-	width: 84%;
+	width: 1150px;
 	margin: 0 auto;
 	margin-top: 10px;
 }

@@ -1,24 +1,10 @@
 <?php
 session_start();
-	try
-	{
-define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
-define('DB_PORT',getenv('OPENSHIFT_MYSQL_DB_PORT')); 
-define('DB_USER',getenv('OPENSHIFT_MYSQL_DB_USERNAME'));
-define('DB_PASS',getenv('OPENSHIFT_MYSQL_DB_PASSWORD'));
-define('DB_NAME',getenv('OPENSHIFT_GEAR_NAME'));
-
-$dsn = 'mysql:dbname='.DB_NAME.';host='.DB_HOST.';port='.DB_PORT;
-$db = new PDO($dsn, DB_USER, DB_PASS);
-	}
-	catch (PDOException $ex)
-	{
-		echo "Error: ". $ex->getMessage();
-		die();
-	}
+include('openshift.php');
 	
 	$id = $_GET['id'];
 	$rank = $_GET['rank'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,6 +68,7 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 			?>
 			<a href="signin.php"><?php echo 'Sign in';?></a>
 			<?php
+			
 			}
 			?>
 			</li>
@@ -101,10 +88,16 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 	<div class="category2">
 	<div id="notification">
 	<?php
-		if (isset($_POST['notify']))
-		{
+	if (isset($_POST['notify']))
+	{
+		if (isset($_SESSION['last_name'])){
 			echo "<div class=\"alert alert-success\" role=\"alert\">You have successfully voted for this definition!</div>";
 		}
+		else 
+		{
+			echo "<div class=\"alert alert-danger\" role=\"alert\">You are not allowed to vote!</div>";
+		}
+	}
 	?>
 	</div>
 	  <h4 class="inlineh3"><strong>Category:</strong></h4>
@@ -157,17 +150,29 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
 	<?php 
 		if (isset($_POST['vote']))
 		{
+				if (isset($_SESSION['last_name'])){
 			$statement = $db->query("UPDATE definition SET votes = votes + 1 WHERE id = " . $_GET['id']);
+				}
+		}
+		
+		if (isset($_POST['comment']))
+		{
+				if (isset($_SESSION['last_name'])){
+					$db->query("INSERT INTO comment (comment, date, d_id, u_id) VALUES ('" . $_POST['comments'] . "', '" . date("Y-m-d") . "', " .  "'" . $id . "', " . "'" . $_SESSION['id'] . "')");
+				}
 		}
 	?>
 	<hr />
 	<!-- comment text area -->
-	<div class="commentWrapper">
-		<textarea placeholder="Share your thoughts" class="form-control" rows="2"></textarea>
-	</div>
-	<div class="commentButtonWrapper">
-		<a href="view_word.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-lg btn-block" role="button">Submit Comment</a>
-	</div>
+	<form action="" method="POST">
+		<div class="commentWrapper">
+			<textarea name="comments" placeholder="Share your thoughts" class="form-control" rows="2"></textarea>
+		</div>
+		<div class="commentButtonWrapper">
+			<button type="submit" name="comment" onclick="notify()" class="btn btn-primary btn-lg btn-block">Submit Comment</button>
+			<input type="hidden" name="notifyComment" value="dummy" />
+		</div>
+	</form>
 	<div class="panel panel-default">
 	  <!-- Default panel contents -->
 	  <div class="panel-body"><strong>User Comments</strong></div>
@@ -183,20 +188,27 @@ $db = new PDO($dsn, DB_USER, DB_PASS);
         </tr>
       </thead>
 	  <tbody>
-		<tr>
-			<td>1</td>
-			<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac ex sodales justo gravida imperdiet eget sit amet nulla. Morbi a justo nec nunc finibus placerat sit amet eu nunc. Ut convallis scelerisque massa, id ultricies est maximus nec. Fusce turpis lectus, volutpat nec vestibulum non, ullamcorper volutpat massa. Sed tincidunt lorem arcu, a condimentum orci condimentum pulvinar. Nunc laoreet dictum lacus at fringilla. Cras vehicula pretium urna eget sodales.</td>
-			<td>5/25/2015</td>
-			<td>semperfi.jay</td>
+	  <?php
+			$statement1 = $db->query("SELECT comment.comment, comment.date, person.user_name
+									 FROM comment
+                                     INNER JOIN person
+                                     ON comment.u_id=person.id
+									 WHERE comment.d_id=" . $id);
 			
-		</tr>
-		<tr>
-			<td>2</td>
-			<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac ex sodales justo gravida imperdiet eget sit amet nulla. Morbi a justo nec nunc finibus placerat sit amet eu nunc. Ut convallis scelerisque massa, id ultricies est maximus nec. Fusce turpis lectus, volutpat nec vestibulum non, ullamcorper volutpat massa. Sed tincidunt lorem arcu, a condimentum orci condimentum pulvinar. Nunc laoreet dictum lacus at fringilla. Cras vehicula pretium urna eget sodales.</td>
-			<td>5/26/2015</td>
-			<td>rlaqlc</td>
 			
+			$index = 1;
+			while ($myRow = $statement1->fetch(PDO::FETCH_ASSOC)){
+				
+		?>
+		<tr>
+			<td><?php echo $index++ ?></td>
+			<td><?php echo $myRow['comment']; ?></td>
+			<td><?php echo $myRow['date']; ?></td>
+			<td><?php echo $myRow['user_name']; ?></td>
 		</tr>
+		<?php
+		}
+		?>
 	  </tbody>
 	  </table>
 	</div>
